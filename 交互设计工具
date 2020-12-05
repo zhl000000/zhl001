@@ -1,0 +1,106 @@
+float[][] co;
+float co1;
+float co2;
+float co3;
+float d=10;
+float easing=0.1;
+float rx=0;
+float ry=0;
+
+void setup(){
+  size(800,800);
+  background(0);
+  noStroke();
+  fill(200);
+  rect(200,50,550,700);
+  co = new float[3][3];  
+  for(int i=0;i<3;i++){
+    for(int j=0;j<3;j++){
+      co[i][j]=random(0,255);
+    }
+  }    
+}
+void draw(){  
+  for(int i=0;i<3;i++){
+    if(hover(i)){
+      stroke(0);
+      strokeWeight(2);
+      fill(co[i][0],co[i][1],co[i][2]);
+      rect(20,30+50*i,100,40);
+    }
+    else{
+      fill(co[i][0],co[i][1],co[i][2]);
+      rect(20-2,30+50*i-2,104,44);
+    }    
+  }  
+  if (hover(0) == false && mousePressed == true){
+    stroke(255);
+    strokeWeight(6); 
+    fill(co[0][0],co[0][1],co[0][2]);
+    rect(20-1,30-1+50*0,100+2,40+2);
+    stroke(0);
+    strokeWeight(8);
+    fill(co[1][0],co[1][1],co[1][2]);
+    rect(20,30+50*1,100,40);
+    stroke(0);
+    strokeWeight(8);
+    fill(co[2][0],co[2][1],co[2][2]);
+    rect(20,30+50*2,100,40);
+    co1=co[0][0];
+    co2=co[0][1];
+    co3=co[0][2];
+  } 
+  else if (hover(1) == false && mousePressed == true){
+    stroke(255);
+    strokeWeight(6); 
+    fill(co[1][0],co[1][1],co[1][2]);
+    rect(20-1,30-1+50*1,100+2,40+2);
+    stroke(0);
+    strokeWeight(8);
+    fill(co[0][0],co[0][1],co[0][2]);
+    rect(20,30+50*0,100,40);
+    stroke(0);
+    strokeWeight(8);
+    fill(co[2][0],co[2][1],co[2][2]);
+    rect(20,30+50*2,100,40);
+    co1=co[1][0];
+    co2=co[1][1];
+    co3=co[1][2];
+  } 
+  else if (hover(2) == false && mousePressed == true){
+    stroke(255);
+    strokeWeight(6); 
+    fill(co[2][0],co[2][1],co[2][2]);
+    rect(20-1,30-1+50*2,100+2,40+2);
+    stroke(0);
+    strokeWeight(8);
+    fill(co[1][0],co[1][1],co[1][2]);
+    rect(20,30+50*1,100,40);
+    stroke(0);
+    strokeWeight(8);
+    fill(co[0][0],co[0][1],co[0][2]);
+    rect(20,30+50*0,100,40);
+    co1=co[2][0];
+    co2=co[2][1];
+    co3=co[2][2];
+  }    
+  float x = constrain(mouseX, 220, 750); 
+  float y = constrain(mouseY, 70, 750);
+  float targetX = x;
+  float targetY = y;
+  rx += (targetX-rx) * easing;
+  ry += (targetY-ry) * easing;
+  if (mousePressed){    
+    noStroke();
+    fill(co1,co2,co3);  
+    ellipse(rx-d,ry-d,d,d); 
+  }  
+}
+boolean hover(float i){
+  if(mouseX>20 && mouseX<120 && mouseY>30+50*i && mouseY<70+50*i){
+    return false;
+  }
+  else{
+    return true;
+  }  
+}
