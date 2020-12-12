@@ -1,0 +1,158 @@
+int fishNum = 100;
+Fish[] fish1 = new Fish[fishNum];
+Fish[] fish2 = new Fish[fishNum];
+Fish[] fish3 = new Fish[fishNum];
+Fish[] fish4 = new Fish[fishNum];
+Fish[] fish5 = new Fish[fishNum];
+boolean mouseDown = false;
+
+void setup(){
+  size(1000,600);
+  background(255);   
+  noStroke();
+  for(int i=0;i<fishNum;i++){    
+    fish1[i] = new Fish(random(width), random(height),random(0,255),random(0,255),random(0,255));    
+  }    
+  for(int i=0;i<fishNum;i++){   
+    fish2[i] = new Fish(random(width), random(height),random(0,255),random(0,255),random(0,255));    
+  }
+  for(int i=0;i<fishNum;i++){   
+    fish3[i] = new Fish(random(width), random(height),random(0,255),random(0,255),random(0,255));    
+  }
+  for(int i=0;i<fishNum;i++){   
+    fish4[i] = new Fish(random(width), random(height),random(0,255),random(0,255),random(0,255));    
+  }
+  for(int i=0;i<fishNum;i++){   
+    fish5[i] = new Fish(random(width), random(height),random(0,255),random(0,255),random(0,255));    
+  }
+}
+
+void draw(){  
+  background(255);
+  for(int i=0;i<fishNum;i++){
+    fish1[i].update(1,1);  
+  }
+    for(int i=0;i<fishNum;i++){
+    fish2[i].update(-1,3);  
+  }
+  for(int i=0;i<fishNum;i++){
+    fish3[i].update(1,1);  
+  }
+  for(int i=0;i<fishNum;i++){
+    fish4[i].update(-1,3);  
+  }
+  for(int i=0;i<fishNum;i++){
+    fish5[i].update(-1,1);  
+  }
+  for(int m = 0; m<fishNum-1; m++){
+    for(int n = 0; n<fishNum; n++){
+      float d = dist(fish1[m].x, fish1[m].y, fish2[n].x, fish2[n].y)+1; 
+      if(d<400){
+        fish1[m].xv -= .002*(mouseX-fish1[m].x)/d;
+        fish1[m].yv -= .002*(mouseY-fish1[m].y)/d;                
+      }
+    }      
+  }
+  for(int m = 0; m<fishNum-1; m++){
+    for(int n = 0; n<fishNum; n++){
+      float d = dist(fish1[m].x, fish1[m].y, fish4[n].x, fish4[n].y)+1; 
+      if(d<400){
+        fish1[m].xv -= .002*(mouseX-fish1[m].x)/d;
+        fish1[m].yv -= .002*(mouseY-fish1[m].y)/d;                
+      }
+    }      
+  }
+  for(int m = 0; m<fishNum-1; m++){
+    for(int n = 0; n<fishNum; n++){
+      float d = dist(fish3[m].x, fish3[m].y, fish2[n].x, fish2[n].y)+1; 
+      if(d<400){
+        fish3[m].xv -= .002*(mouseX-fish3[m].x)/d;
+        fish3[m].yv -= .002*(mouseY-fish3[m].y)/d;                
+      }
+    }      
+  }
+  for(int m = 0; m<fishNum-1; m++){
+    for(int n = 0; n<fishNum; n++){
+      float d = dist(fish3[m].x, fish3[m].y, fish4[n].x, fish4[n].y)+1; 
+      if(d<400){
+        fish3[m].xv -= .002*(mouseX-fish3[m].x)/d;
+        fish3[m].yv -= .002*(mouseY-fish3[m].y)/d;                
+      }
+    }      
+  }
+  for(int m = 0; m<fishNum-1; m++){
+    for(int n = 0; n<fishNum; n++){
+      float d = dist(fish5[m].x, fish5[m].y, fish2[n].x, fish2[n].y)+1; 
+      if(d<400){
+        fish5[m].xv -= .002*(mouseX-fish5[m].x)/d;
+        fish5[m].yv -= .002*(mouseY-fish5[m].y)/d;                
+      }
+    }      
+  }
+  for(int m = 0; m<fishNum-1; m++){
+    for(int n = 0; n<fishNum; n++){
+      float d = dist(fish5[m].x, fish5[m].y, fish4[n].x, fish4[n].y)+1; 
+      if(d<400){
+        fish5[m].xv -= .002*(mouseX-fish5[m].x)/d;
+        fish5[m].yv -= .002*(mouseY-fish5[m].y)/d;                
+      }
+    }      
+  }
+  
+  for (int i=0;i<fishNum;i++){
+    float dd1;
+    dd1 = sqrt(fish1[i].x-mouseX)+sqrt(fish1[i].y-mouseY);
+    float dd2;
+    dd2 = sqrt(fish2[i].x-mouseX)+sqrt(fish2[i].y-mouseY);
+    float dd3;
+    dd3 = sqrt(fish3[i].x-mouseX)+sqrt(fish3[i].y-mouseY);
+    float dd4;
+    dd4 = sqrt(fish4[i].x-mouseX)+sqrt(fish4[i].y-mouseY);
+    float dd5;
+    dd5 = sqrt(fish1[i].x-mouseX)+sqrt(fish5[i].y-mouseY);
+    if(mouseDown){
+      if(dd1<2500){
+        float g1;
+        g1=random(0,1);
+        if(g1<0.5){
+          fish1[i].drawFish(1,255,255,255);
+        }
+      }
+      if(dd2<2500){
+        float g2;
+        g2=random(0,1);
+        if(g2<0.3){
+          fish2[i].drawFish(3,255,255,255);
+        }
+      }
+      if(dd3<2500){
+        float g3;
+        g3=random(0,1);
+        if(g3<0.5){
+          fish3[i].drawFish(1,255,255,255);
+        }
+      }
+      if(dd4<2500){
+        float g4;
+        g4=random(0,1);
+        if(g4<0.3){
+          fish4[i].drawFish(3,255,255,255);
+        }
+      }
+      if(dd5<2500){
+        float g5;
+        g5=random(0,1);
+        if(g5<0.5){
+          fish5[i].drawFish(1,255,255,255);
+        }
+      }
+    }
+  }
+} 
+
+void mousePressed(){
+  mouseDown = true;
+}
+void mouseReleased(){
+  mouseDown = false;
+}
