@@ -156,3 +156,65 @@ void mousePressed(){
 void mouseReleased(){
   mouseDown = false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+ float bx = 5, by = 40; 
+  float cx = -40, cy = 0;
+  float dx = 5, dy = -40; 
+  float ex = 10, ey = 0; 
+  float animOff = random(TWO_PI); 
+  float a;
+  float b;
+  float c;
+  
+  Fish(float x, float y,float a,float b,float c ){
+    this.x = x;
+    this.y = y;
+    this.a = a;
+    this.b = b;
+    this.c = c;
+  } 
+  void update(float j , float k){     
+    this.tailStep += this.tailSpeed;    
+    this.xv += (  noise(  this.x*.005 + PI,this.y*.005, millis()*.005  )*2-1 )*1+j;
+    this.yv += (  noise(  this.x*.005 - PI,this.y*.005, millis()*.005  )*2-1  )*1;
+    this.xv = constrain(this.xv, -2,2);
+    this.yv = constrain(this.yv, -2,2); 
+    this.x += this.xv;
+    this.y += this.yv; 
+    drawFish(k,a,b,c); 
+    if(this.x<-10){
+      this.x = width+10;
+    }
+    else if(this.x>width+10){
+      this.x = -10;
+    } 
+    if(this.y<-10){
+      this.y = height+10;
+    }
+    else if(this.y>height+10){
+      this.y = -10;
+    } 
+  } 
+  void drawFish(float k,float a,float b,float c){
+    fill(a,b,c);
+    sy = 30*sin( this.tailStep*.1 + this.animOff);
+    pushMatrix();
+    translate(this.x, this.y);
+    scale(this.s,this.s);
+    rotate( atan2(this.yv, this.xv) ); 
+    bezier( this.sx*k,this.sy*k, this.ax*k,this.ay*k, this.bx*k,this.by*k, this.ex*k,this.ey*k );
+    bezier( this.sx*k,this.sy*k, this.cx*k,this.cy*k, this.dx*k,this.dy*k, this.ex*k,this.ey*k );
+    popMatrix(); 
+  } 
+}
